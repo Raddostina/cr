@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Автоматично зареждане на Excel</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+</head>
+<body>
+
+    <h2>Excel таблица (автоматично зареждане)</h2>
+    <table id="excelTable" border="1"></table>
+
+    <script>
+        async function loadExcel() {
+            let response = await fetch('data.xlsx');
+            let workbook = XLSX.read(data, { type: 'array' });
+            let sheet = workbook.Sheets[workbook.SheetNames[0]];
+            let html = XLSX.utils.sheet_to_html(sheet);
+            document.getElementById('excelTable').innerHTML = html;
+        }
+        loadExcel();
+    </script>
+
+</body>
+</html>
